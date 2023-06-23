@@ -2,8 +2,8 @@ const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
   info: {
-    title: 'My API',
-    description: 'Project API',
+    title: 'SnackAPI',
+    description: 'An api for getting snacks',
   },
   host: process.env.SWAGGER_HOST ?? `localhost:${process.env.PORT ?? 3001}`,
   schemes: process.env.SWAGGER_SCHEMES ?? ["http"],

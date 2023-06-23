@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', requiresAuth(), (req, res) => res.json("got all"));
 router.get('/:id', requiresAuth(), (req, res) => res.json("got snack"));
-router.get('/snack', requiresAuth(), (req, res) => res.json("got random"));
+router.get('/random', requiresAuth(), (req, res) => res.json("got random"));
 router.post('/:id', requiresAuth(), (req, res) => res.json("inserted that"));
 router.put('/:id', requiresAuth(), (req, res) => res.json("edited that"));
 router.delete('/:id',requiresAuth(), deleteSnack);
