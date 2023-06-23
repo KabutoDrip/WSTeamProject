@@ -4,6 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "dev": "nodemon app.js",
+    "build": "npm i && npm run swagger",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "git-update": "git add . && git commit -m \"update\" && git push",
