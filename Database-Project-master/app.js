@@ -4,6 +4,7 @@ const mongodb = require("./db/connect");
 const { auth } = require("express-openid-connect");
 
 const config = {
+  authRequired: false,
   idpLogout: true,
   secret: process.env.OKTA_SECRET,
   baseURL: process.env.OKTA_BASE_URL ?? `http://localhost:3001`,
