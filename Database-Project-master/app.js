@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongodb = require("./db/connect");
 const { auth } = require("express-openid-connect");
-
 const config = {
   authRequired: false,
   idpLogout: true,
@@ -10,8 +9,10 @@ const config = {
   baseURL: process.env.OKTA_BASE_URL ?? `http://localhost:3001`,
   clientID: "okqztuEns5khHgcTwRiOk6qOqt2dQzBc",
   issuerBaseURL: "https://kubutodrip.us.auth0.com",
+  session: {
+    name: process.env.AUTH_COOKIE_NAME ?? "local-auth",
+  },
 };
-
 
 const port = process.env.PORT || 3001;
 const app = express();
