@@ -2,7 +2,7 @@
   "name": "databse-project",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
     "build": "npm i && npm run swagger",

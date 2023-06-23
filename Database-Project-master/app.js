@@ -7,7 +7,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: process.env.OKTA_SECRET,
-  baseURL: `localhost:${process.env.PORT ?? 3001}`,
+  baseURL: process.env.OKTA_BASE_URL ?? `localhost:${process.env.PORT ?? 3001}`,
   clientID: "okqztuEns5khHgcTwRiOk6qOqt2dQzBc",
   issuerBaseURL: "https://kubutodrip.us.auth0.com",
 };
