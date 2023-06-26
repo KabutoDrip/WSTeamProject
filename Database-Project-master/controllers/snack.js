@@ -57,5 +57,6 @@ const deleteSnack = async (req, res) => {
 };
 
 module.exports = {
+  createSnack,
   deleteSnack,
 };
