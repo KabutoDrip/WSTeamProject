@@ -5,7 +5,7 @@ const ObjectId = require("mongodb").ObjectId;
 const createSnack = async (req, res) => {
   try {
     const snackId = {
-      snack: req.snack.snack,
+      snack: req.body.snack,
     };
     const response = await mongodb
       .getDb()
