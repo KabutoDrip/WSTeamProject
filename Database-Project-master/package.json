@@ -9,9 +9,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
     "git-update": "git add . && git commit -m \"update\" && git push",
-    "swagger": "node ./swagger.js"
+    "swagger": "node ./swagger.js",
+    "types": "tsc index.ts snack.ts swagger.ts"
   },
   "dependencies": {
+    "@types/node": "^20.3.2",
     "axios": "^1.4.0",
     "body-parser": "^1.18.3",
     "dotenv": "^16.0.3",
@@ -20,13 +22,14 @@
     "express-session": "^1.17.3",
     "mongodb": "^5.3.0",
     "swagger-ui-express": "4.6.3",
+    "typescript": "^5.1.6",
     "validator": "^13.9.0"
   },
   "devDependencies": {
     "eslint": "8.10.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "nodemon": "^2.0.22",
+    "nodemon": "^1.14.9",
     "prettier": "^2.5.1",
     "swagger-autogen": "2.23.1"
   },
