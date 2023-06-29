@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongodb = require("./db/connect");
-const { auth } = require("express-openid-connect");
+const {auth} = require("express-openid-connect");
 const config = {
   authRequired: false,
   idpLogout: true,

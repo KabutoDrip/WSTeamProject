@@ -1,9 +1,9 @@
-const swaggerAutogen = require('swagger-autogen')();
+const swaggerAutogen = require("swagger-autogen")();
 
 const doc = {
   info: {
-    title: 'SnackAPI',
-    description: 'An api for getting snacks',
+    title: "SnackAPI",
+    description: "An api for getting snacks",
   },
   host: process.env.SWAGGER_HOST ?? `localhost:${process.env.PORT ?? 3001}`,
   schemes: process.env.SWAGGER_SCHEMES ?? ["http"],
@@ -11,8 +11,8 @@ const doc = {
   // schemes: ['http'],
 };
 
-const outputFile = './swagger.json';
-const endpointsFiles = ['./routes/index.js'];
+const outputFile = "./swagger.json";
+const endpointsFiles = ["./routes/index.js"];
 
 // generate swagger.json
 // ...
