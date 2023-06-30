@@ -1,7 +1,7 @@
 const express = require("express");
 // Calling from the controllers folder the methods post and delete
 const snackController = require("../controllers/snack.js");
-const {requiresAuth} = require("express-openid-connect");
+const { requiresAuth } = require("express-openid-connect");
 const router = express.Router();
 
 router.get("/", requiresAuth(), (req, res) => res.json("got all"));
