@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run build && nodemon app.js",
     "build": "npm i && npm run swagger",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node app.js",
     "git-update": "git add . && git commit -m \"update\" && git push",
     "swagger": "node ./swagger.js"
@@ -26,6 +26,7 @@
     "eslint": "8.10.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^29.5.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.5.1",
     "swagger-autogen": "2.23.1"

@@ -14,7 +14,7 @@ const createSnack = async (req, res) => {
       .insertOne(snackId);
 
     if (!response) {
-      res.status(500).json({ message: "Snack is not created." });
+      res.status(500).json({message: "Snack is not created."});
     }
     if (response.acknowledged) {
       res.status(201).json(response);
@@ -26,7 +26,96 @@ const createSnack = async (req, res) => {
         );
     }
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({message: error.message});
+  }
+};
+
+// Creating a post for candy and pastries
+const createCandyPastries = async (req, res) => {
+  try {
+    const CandyPastriesId = {
+      snack: req.body.snack,
+    };
+    const response = await mongodb
+      .getDb()
+      .db("SnackAPI")
+      .collection("candy&Pastries")
+      .insertOne(CandyPastriesId);
+
+    if (!response) {
+      res.status(500).json({message: "Candy and pastries is not created."});
+    }
+    if (response.acknowledged) {
+      res.status(201).json(response);
+    } else {
+      res
+        .status(500)
+        .json(
+          response.error ||
+            "Some error occurred while creating the candy and pastries."
+        );
+    }
+  } catch (error) {
+    res.status(400).json({message: error.message});
+  }
+};
+
+// Creating a post for candy and pastries
+const createMeats = async (req, res) => {
+  try {
+    const createMeatsId = {
+      snack: req.body.snack,
+    };
+    const response = await mongodb
+      .getDb()
+      .db("SnackAPI")
+      .collection("meats")
+      .insertOne(createMeatsId);
+
+    if (!response) {
+      res.status(500).json({message: "Meats is not created."});
+    }
+    if (response.acknowledged) {
+      res.status(201).json(response);
+    } else {
+      res
+        .status(500)
+        .json(
+          response.error || "Some error occurred while creating the meats."
+        );
+    }
+  } catch (error) {
+    res.status(400).json({message: error.message});
+  }
+};
+
+// Creating a post for nuts and dried fruits
+const createNutsDried_Fruits = async (req, res) => {
+  try {
+    const NutsDried_FruitsId = {
+      snack: req.body.snack,
+    };
+    const response = await mongodb
+      .getDb()
+      .db("SnackAPI")
+      .collection("nuts&dried_Fruits")
+      .insertOne(NutsDried_FruitsId);
+
+    if (!response) {
+      res.status(500).json({message: "Nuts and dried fruits are not created."});
+    }
+    if (response.acknowledged) {
+      res.status(201).json(response);
+    } else {
+      res
+        .status(500)
+        .json(
+          response.error ||
+            "Some error occurred while creating the nuts and dried fruits."
+        );
+    }
+  } catch (error) {
+    res.status(400).json({message: error.message});
   }
 };
 
@@ -43,14 +132,16 @@ const deleteSnack = async (req, res) => {
       res.status(400).json("Snack must have a valid id.");
       return;
     } else if (!collection || typeof collection !== "string") {
-      res.status(400).json("Snack must have a type and the type must be a string.");
+      res
+        .status(400)
+        .json("Snack must have a type and the type must be a string.");
       return;
     }
     const response = await mongodb
       .getDb()
       .db("SnackAPI")
       .collection(collection)
-      .deleteOne({ _id: snackId }, true);
+      .deleteOne({_id: snackId}, true);
     if (response.deletedCount > 0) {
       res.status(204).json("The snack was deleted successfully.");
     } else {
@@ -68,4 +159,7 @@ const deleteSnack = async (req, res) => {
 module.exports = {
   createSnack,
   deleteSnack,
+  createCandyPastries,
+  createMeats,
+  createNutsDried_Fruits,
 };
