@@ -1,7 +1,5 @@
-//const express = require('express');
-const { deleteSnack } = require('../controllers/snack.js');
-//const { requiresAuth } = require('express-openid-connect');
-//const router = express.Router();
+import {express, requiresAuth, router, deleteSnack} from './tsvars'
+
 
 router.get('/', requiresAuth(), (req, res) => res.json("got all"));
 router.get('/:id', requiresAuth(), (req, res) => res.json("got snack"));

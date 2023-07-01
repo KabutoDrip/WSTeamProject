@@ -1,6 +1,4 @@
-export const express = require('express');
-const { requiresAuth } = require('express-openid-connect');
-const router = express.Router();
+import {express, requiresAuth, router} from './tsvars'
 router.use('/api-docs', require('./swagger'))
 router.use('/snack', require('./snack'))
 router.get('/me', requiresAuth(), (req, res) => {
