@@ -7,6 +7,18 @@ const router = express.Router();
 router.get("/", (req, res) => res.json("got all"));
 router.get("/:id", (req, res) => res.json("got snack"));
 router.get("/random", (req, res) => res.json("got random"));
+//get all by category
+router.get('/', requiresAuth(), snackController.getAllSnacks);
+router.get('/', requiresAuth(), snackController.getAllCandyPastries);
+router.get('/', requiresAuth(), snackController.getAllMeats);
+router.get('/', requiresAuth(), snackController.getNutsDried_FruitsId);
+//get single by id 
+router.get('/:id', snackController.getSnacksId);
+router.get('/:id', snackController.getCandyPastriesId);
+router.get('/:id', snackController.getMeatsId);
+router.get('/:id', snackController.getNutsDried_FruitsId);
+
+
 // This post is working in the api-docs by creating it.
 router.post("/", requiresAuth(), snackController.createSnack);
 router.post("/", requiresAuth(), snackController.createCandyPastries);

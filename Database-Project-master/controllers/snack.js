@@ -119,6 +119,131 @@ const createNutsDried_Fruits = async (req, res) => {
   }
 };
 
+//const getAll
+
+const getAllSnacks = async (req, res) => {
+  try{
+    const result = await mongodb.getDb().db('SnackAPI').collection('snack').find();
+    result.toArray().then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+    });
+  }
+  catch(error){
+    res.status(400).json({message:error.message})
+  }
+  };
+
+const getSnacksId = async (req, res) => {
+  try{
+    const selected = new ObjectId(req.params.id);
+    const result = await mongodb.getDb().db('SnackAPI').collection('snack').find({ _id: selected });
+    result.toArray().then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists[0]);
+    });
+  }
+  catch(error){
+    res.status(400).json({message:error.message})
+  
+  }
+  };
+
+const getAllCandyPastries = async (req, res) => {
+  try{
+    const result = await mongodb.getDb().db('SnackAPI').collection('candy&Pastries').find();
+    result.toArray().then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+    });
+  }
+  catch(error){
+    res.status(400).json({message:error.message})
+  }
+  };
+
+const getCandyPastriesId = async (req, res) => {
+  try{
+    const selected = new ObjectId(req.params.id);
+    const result = await mongodb.getDb().db('SnackAPI').collection('candy&Pastries').find({ _id: selected });
+    result.toArray().then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists[0]);
+    });
+  }
+  catch(error){
+    res.status(400).json({message:error.message})
+  
+  }
+  };
+
+const getAllMeats = async (req, res) => {
+  try{
+    const result = await mongodb.getDb().db('SnackAPI').collection('meats').find();
+    result.toArray().then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+    });
+  }
+  catch(error){
+    res.status(400).json({message:error.message})
+  }
+  };
+
+const getMeatsId  = async (req, res) => {
+  try{
+    const selected = new ObjectId(req.params.id);
+    const result = await mongodb.getDb().db('SnackAPI').collection('meats').find({ _id: selected });
+    result.toArray().then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists[0]);
+    });
+  }
+  catch(error){
+    res.status(400).json({message:error.message})
+  
+  }
+  };
+
+const getAllNutsDried_Fruits = async (req, res) => {
+  try{
+    const result = await mongodb.getDb().db('SnackAPI').collection('nuts&dried_Fruits').find();
+    result.toArray().then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+    });
+  }
+  catch(error){
+    res.status(400).json({message:error.message})
+  }
+  };
+
+const getNutsDried_FruitsId = async (req, res) => {
+  try{
+    const selected = new ObjectId(req.params.id);
+    const result = await mongodb.getDb().db('SnackAPI').collection('nuts&dried_Fruits').find({ _id: selected });
+    result.toArray().then((lists) => {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists[0]);
+    });
+  }
+  catch(error){
+    res.status(400).json({message:error.message})
+  
+  }
+  };
+
+//const randomSnacks
+
+//const randomCandyPastries
+
+//const randomMeats
+
+//const randomNutsDreid_Fruits
+
+
+
+
 // Delete snack
 const deleteSnack = async (req, res) => {
   try {
@@ -162,4 +287,12 @@ module.exports = {
   createCandyPastries,
   createMeats,
   createNutsDried_Fruits,
+  getAllSnacks,
+  getAllCandyPastries,
+  getAllMeats,
+  getAllNutsDried_Fruits,
+  getSnacksId,
+  getCandyPastriesId,
+  getMeatsId,
+  getNutsDried_FruitsId,
 };
