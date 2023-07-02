@@ -20,10 +20,10 @@ router.get('/:id', snackController.getNutsDried_FruitsId);
 
 
 // This post is working in the api-docs by creating it.
-router.post("/", requiresAuth(), snackController.createSnack);
-router.post("/", requiresAuth(), snackController.createCandyPastries);
-router.post("/", requiresAuth(), snackController.createMeats);
-router.post("/", requiresAuth(), snackController.createNutsDried_Fruits);
+router.post("/", requiresAuth(), snackController.createSnackId);
+router.post("/", requiresAuth(), snackController.createCandyPastriesId);
+router.post("/", requiresAuth(), snackController.createMeatsId);
+router.post("/", requiresAuth(), snackController.createNutsDried_FruitsId);
 router.put("/", requiresAuth(), (req, res) => res.json("edited that"));
 router.delete("/", requiresAuth(), snackController.deleteSnack);
 
