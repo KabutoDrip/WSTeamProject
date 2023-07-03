@@ -2,7 +2,7 @@ const mongodb = require("../db/connect");
 const ObjectId = require("mongodb").ObjectId;
 
 // Creating a post
-const createSnack = async (req, res) => {
+const createSnackId = async (req, res) => {
   try {
     const snackId = {
       snack: req.body.snack,
@@ -95,7 +95,7 @@ const deleteSnack = async (req, res) => {
 };
 
 module.exports = {
-  createSnack,
+  createSnackId,
   deleteSnack,
   getAllSnacks,
   getSnacksId
