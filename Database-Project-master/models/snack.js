@@ -1,6 +1,6 @@
 module.exports = (mongoose) => {
-    const SD1 = mongoose.model(
-      'sampledata1',
+    const Snack = mongoose.model(
+      'snack',
       mongoose.Schema(
         {
           ///
@@ -9,6 +9,6 @@ module.exports = (mongoose) => {
       )
     );
   
-    return SD1;
+    return Snack;
   };
   

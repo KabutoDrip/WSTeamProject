@@ -6,7 +6,7 @@ mongoose.Promise = global.Promise;
 const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
-db.SD1 = require('./sample1.js')(mongoose);
-db.SD2 = require('./sample2.js')(mongoose);
+db.Snack = require('./snack.js')(mongoose);
+//db.SD2 = require('./sample2.js')(mongoose);
 
 module.exports = db;

@@ -108,3 +108,4 @@ content-type: application/json
 ###
 DELETE  https://cse341-cbjm.onrender.com/SampleData2/64697cbc7f006d51681c2ffc HTTP/1.1
 ###
+GET http://localhost:3001/Snack/getAllCandyPastries
