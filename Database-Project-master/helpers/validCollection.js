@@ -1,4 +1,4 @@
-export default (collectionName) => {
+const validCollection = (collectionName) => {
   valid = {
     "candy&Pastries": "",
     meats: "",
@@ -11,3 +11,5 @@ export default (collectionName) => {
     collections: Object.keys(valid),
   };
 };
+
+module.exports = validCollection;

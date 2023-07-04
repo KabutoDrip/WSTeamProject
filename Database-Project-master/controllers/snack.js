@@ -1,5 +1,4 @@
 const mongodb = require("../db/connect");
-const { default: validCollection } = require("../helpers/validCollection");
 const ObjectId = require("mongodb").ObjectId;
 const validCollection = require("../helpers/validCollection");
 
