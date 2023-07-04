@@ -96,8 +96,10 @@ const editSnack = async (req, res) => {
       .db("SnackAPI")
       .collection(collection)
       .replaceOne({ _id: snackId }, snack);
-    if (response.deletedCount > 0) {
-      res.status(204).json(response);
+    if (response.ok) {
+      res
+        .status(204)
+        .json({ message: "Snack was updated successfully", response });
     } else {
       res
         .status(500)
@@ -106,7 +108,7 @@ const editSnack = async (req, res) => {
         );
     }
   } catch (error) {
-    res.status(400).json(error.message);
+    res.status(500).json(error.message);
   }
 };
 // Delete snack
@@ -142,7 +144,9 @@ const deleteSnack = async (req, res) => {
       .collection(collection)
       .deleteOne({ _id: snackId }, true);
     if (response.deletedCount > 0) {
-      res.status(204).json("The snack was deleted successfully.");
+      res
+        .status(204)
+        .json({ message: "The snack was deleted successfully.", response });
     } else {
       res
         .status(500)
@@ -151,7 +155,7 @@ const deleteSnack = async (req, res) => {
         );
     }
   } catch (error) {
-    res.status(400).json(error.message);
+    res.status(500).json(error.message);
   }
 };
 
