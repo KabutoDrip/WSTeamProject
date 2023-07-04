@@ -1,15 +1,20 @@
 const express = require("express");
 // Calling from the controllers folder the methods post and delete
-const snackController = require("../controllers/snack.js");
-const {requiresAuth} = require("express-openid-connect");
+const {
+  getAllSnacks,
+  getSnacksId,
+  createSnack,
+  editSnack,
+  deleteSnack,
+} = require("../controllers/snack.js");
+const { requiresAuth } = require("express-openid-connect");
 const router = express.Router();
 
-router.get('/', requiresAuth(), snackController.getAllSnacks);
-router.get('/:id', snackController.getSnacksId);
-router.post("/", requiresAuth(), snackController.createSnack);
+router.get("/", getAllSnacks);
+router.get("/:id", getSnacksId);
+router.post("/", requiresAuth(), createSnack);
 
-
-//router.put("/", requiresAuth(), (req, res) => res.json("edited that"));
-router.delete("/", requiresAuth(), snackController.deleteSnack);
+router.put("/:id", requiresAuth(), editSnack);
+router.delete("/:id", requiresAuth(), deleteSnack);
 
 module.exports = router;
