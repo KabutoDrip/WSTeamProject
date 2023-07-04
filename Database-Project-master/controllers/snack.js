@@ -1,5 +1,7 @@
 const mongodb = require("../db/connect");
+const { default: validCollection } = require("../helpers/validCollection");
 const ObjectId = require("mongodb").ObjectId;
+const validCollection = require("../helpers/validCollection");
 
 // Creating a post
 const createSnack = async (req, res) => {
@@ -80,6 +82,15 @@ const editSnack = async (req, res) => {
         .json("Snack must have a type and the type must be a string.");
       return;
     }
+    const { valid, collections } = validCollection(collection);
+    if (!valid) {
+      res
+        .status(400)
+        .json(
+          `That is not a valid collection. Snack type must be one of the following: ${collections.toString()}`
+        );
+      return;
+    }
     const response = await mongodb
       .getDb()
       .db("SnackAPI")
@@ -114,6 +125,15 @@ const deleteSnack = async (req, res) => {
       res
         .status(400)
         .json("Snack must have a type and the type must be a string.");
+      return;
+    }
+    const { valid, collections } = validCollection(collection);
+    if (!valid) {
+      res
+        .status(400)
+        .json(
+          `That is not a valid collection. Snack type must be one of the following: ${collections.toString()}`
+        );
       return;
     }
     const response = await mongodb
