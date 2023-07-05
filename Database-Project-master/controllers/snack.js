@@ -4,15 +4,20 @@ const validCollection = require("../helpers/validCollection");
 
 // Creating a post
 const createSnack = async (req, res) => {
+
   try {
-    const snackId = {
-      snack: req.body.snack,
+    const snack = {
+      maker: req.body.maker,
+      name: req.body.name,
+      sugar: req.body.sugar,
+      calories: req.body.calories,
+      ingredients: req.body.ingredients
     };
     const response = await mongodb
       .getDb()
       .db("SnackAPI")
       .collection("snack")
-      .insertOne(snackId);
+      .insertOne(snack);
 
     if (!response) {
       res.status(500).json({ message: "Snack is not created." });
