@@ -8,7 +8,9 @@ const createMeats = async (req, res) => {
         name: req.body.name,
         sugar: req.body.sugar,
         calories: req.body.calories,
-        ingredients: req.body.ingredients
+        ingredients: req.body.ingredients,
+        ounces: req.body.ounces,
+        totalFat: req.body.totalFat
       };
       const response = await mongodb
         .getDb()

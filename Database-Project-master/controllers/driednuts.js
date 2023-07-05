@@ -5,11 +5,13 @@ const createNutsDried_Fruits = async (req, res) => {
 
     try {
        const driedNuts = {
-      maker: req.body.maker,
-      name: req.body.name,
-      sugar: req.body.sugar,
-      calories: req.body.calories,
-      ingredients: req.body.ingredients
+        maker: req.body.maker,
+        name: req.body.name,
+        sugar: req.body.sugar,
+        calories: req.body.calories,
+        ingredients: req.body.ingredients,
+        ounces: req.body.ounces,
+        totalFat: req.body.totalFat
     };
       const response = await mongodb
         .getDb()
