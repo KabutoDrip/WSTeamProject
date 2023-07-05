@@ -2,15 +2,20 @@ const mongodb = require("../db/connect");
 const ObjectId = require("mongodb").ObjectId;
 
 const createNutsDried_Fruits = async (req, res) => {
+
     try {
-      const NutsDried_FruitsId = {
-        snack: req.body.snack,
-      };
+       const driedNuts = {
+      maker: req.body.maker,
+      name: req.body.name,
+      sugar: req.body.sugar,
+      calories: req.body.calories,
+      ingredients: req.body.ingredients
+    };
       const response = await mongodb
         .getDb()
         .db("SnackAPI")
         .collection("nuts&dried_Fruits")
-        .insertOne(NutsDried_FruitsId);
+        .insertOne(driedNuts);
   
       if (!response) {
         res.status(500).json({message: "Nuts and dried fruits are not created."});

@@ -3,14 +3,18 @@ const ObjectId = require("mongodb").ObjectId;
 
 const createCandyPastries = async (req, res) => {
     try {
-      const CandyPastriesId = {
-        snack: req.body.snack,
+      const CandyPastries = {
+        maker: req.body.maker,
+        name: req.body.name,
+        sugar: req.body.sugar,
+        calories: req.body.calories,
+        ingredients: req.body.ingredients
       };
       const response = await mongodb
         .getDb()
         .db("SnackAPI")
         .collection("candy&Pastries")
-        .insertOne(CandyPastriesId);
+        .insertOne(CandyPastries);
   
       if (!response) {
         res.status(500).json({message: "Candy and pastries is not created."});

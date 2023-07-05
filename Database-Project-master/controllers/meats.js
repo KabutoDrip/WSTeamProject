@@ -3,14 +3,18 @@ const ObjectId = require("mongodb").ObjectId;
 
 const createMeats = async (req, res) => {
     try {
-      const createMeatsId = {
-        snack: req.body.snack,
+      const meats = {
+        maker: req.body.maker,
+        name: req.body.name,
+        sugar: req.body.sugar,
+        calories: req.body.calories,
+        ingredients: req.body.ingredients
       };
       const response = await mongodb
         .getDb()
         .db("SnackAPI")
         .collection("meats")
-        .insertOne(createMeatsId);
+        .insertOne(meats);
   
       if (!response) {
         res.status(500).json({message: "Meats is not created."});
