@@ -8,8 +8,10 @@ const createSnack = async (req, res) => {
     const snack = {
       maker: req.body.maker,
       name: req.body.name,
-      sugar: req.body.sugar,
+      ounces: req.body.ounces,
       calories: req.body.calories,
+      sugar: req.body.sugar,
+      totalFat: req.body.totalFat,
       ingredients: req.body.ingredients,
       ounces: req.body.ounces,
       totalFat: req.body.totalFat,
