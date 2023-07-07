@@ -74,21 +74,32 @@ const getSnacksId = async (req, res) => {
 // Edit snack
 const editSnack = async (req, res) => {
   try {
-    const collection = req.body?.type;
     const snackId = new ObjectId(req.params.id);
-    if (!req.body) {
+    const snack = {
+      type: req.body.type,
+      maker: req.body.maker,
+      name: req.body.name,
+      ounces: req.body.ounces,
+      calories: req.body.calories,
+      sugar: req.body.sugar,
+      totalFat: req.body.totalFat,
+      ingredients: req.body.ingredients,
+      ounces: req.body.ounces,
+      totalFat: req.body.totalFat,
+    }
+    if (Object.keys(snack).length === 0) {
       res.status(400).json("No snack was sent in the request.");
       return;
     } else if (!snackId) {
       res.status(400).json("Snack must have a valid id.");
       return;
-    } else if (!collection || typeof collection !== "string") {
+    } else if (!snack.type || typeof snack.type !== "string") {
       res
         .status(400)
         .json("Snack must have a type and the type must be a string.");
       return;
     }
-    const { valid, collections } = validCollection(collection);
+    const { valid, collections } = validCollection(snack.type);
     if (!valid) {
       res
         .status(400)
@@ -100,12 +111,12 @@ const editSnack = async (req, res) => {
     const response = await mongodb
       .getDb()
       .db("SnackAPI")
-      .collection(collection)
+      .collection(snack.type)
       .replaceOne({ _id: snackId }, req.body);
     if (response.acknowledged) {
       res
         .status(204)
-        .json({ message: "Snack was updated successfully", response }); //needs fixing
+        .send("Snack was updated successfully"); //needs fixing
     } else {
       res
         .status(500)

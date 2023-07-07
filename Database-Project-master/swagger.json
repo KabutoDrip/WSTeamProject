@@ -60,19 +60,19 @@
                 "name": {
                   "example": "any"
                 },
-                "sugar": {
+                "ounces": {
                   "example": "any"
                 },
                 "calories": {
                   "example": "any"
                 },
-                "ingredients": {
-                  "example": "any"
-                },
-                "ounces": {
+                "sugar": {
                   "example": "any"
                 },
                 "totalFat": {
+                  "example": "any"
+                },
+                "ingredients": {
                   "example": "any"
                 }
               }
@@ -132,6 +132,27 @@
               "properties": {
                 "type": {
                   "example": "any"
+                },
+                "maker": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                },
+                "ounces": {
+                  "example": "any"
+                },
+                "calories": {
+                  "example": "any"
+                },
+                "sugar": {
+                  "example": "any"
+                },
+                "totalFat": {
+                  "example": "any"
+                },
+                "ingredients": {
+                  "example": "any"
                 }
               }
             }
@@ -157,18 +178,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "type": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
