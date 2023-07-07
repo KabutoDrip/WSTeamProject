@@ -54,7 +54,25 @@
             "schema": {
               "type": "object",
               "properties": {
-                "snack": {
+                "maker": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                },
+                "sugar": {
+                  "example": "any"
+                },
+                "calories": {
+                  "example": "any"
+                },
+                "ingredients": {
+                  "example": "any"
+                },
+                "ounces": {
+                  "example": "any"
+                },
+                "totalFat": {
                   "example": "any"
                 }
               }
@@ -64,37 +82,6 @@
         "responses": {
           "201": {
             "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "example": "any"
-                },
-                "type": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content"
           },
           "400": {
             "description": "Bad Request"
@@ -127,6 +114,74 @@
             "description": "Bad Request"
           }
         }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/driednuts/": {
@@ -154,7 +209,25 @@
             "schema": {
               "type": "object",
               "properties": {
-                "snack": {
+                "maker": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                },
+                "sugar": {
+                  "example": "any"
+                },
+                "calories": {
+                  "example": "any"
+                },
+                "ingredients": {
+                  "example": "any"
+                },
+                "ounces": {
+                  "example": "any"
+                },
+                "totalFat": {
                   "example": "any"
                 }
               }
@@ -223,7 +296,25 @@
             "schema": {
               "type": "object",
               "properties": {
-                "snack": {
+                "maker": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                },
+                "sugar": {
+                  "example": "any"
+                },
+                "calories": {
+                  "example": "any"
+                },
+                "ingredients": {
+                  "example": "any"
+                },
+                "ounces": {
+                  "example": "any"
+                },
+                "totalFat": {
                   "example": "any"
                 }
               }
@@ -292,7 +383,25 @@
             "schema": {
               "type": "object",
               "properties": {
-                "snack": {
+                "maker": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                },
+                "sugar": {
+                  "example": "any"
+                },
+                "calories": {
+                  "example": "any"
+                },
+                "ingredients": {
+                  "example": "any"
+                },
+                "ounces": {
+                  "example": "any"
+                },
+                "totalFat": {
                   "example": "any"
                 }
               }

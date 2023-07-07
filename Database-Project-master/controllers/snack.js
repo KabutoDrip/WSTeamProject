@@ -4,7 +4,6 @@ const validCollection = require("../helpers/validCollection");
 
 // Creating a post
 const createSnack = async (req, res) => {
-
   try {
     const snack = {
       maker: req.body.maker,
@@ -13,7 +12,7 @@ const createSnack = async (req, res) => {
       calories: req.body.calories,
       ingredients: req.body.ingredients,
       ounces: req.body.ounces,
-      totalFat: req.body.totalFat
+      totalFat: req.body.totalFat,
     };
     const response = await mongodb
       .getDb()
@@ -73,10 +72,9 @@ const getSnacksId = async (req, res) => {
 // Edit snack
 const editSnack = async (req, res) => {
   try {
-    const snack = req.body?.snack;
+    const collection = req.body?.type;
     const snackId = new ObjectId(req.params.id);
-    const collection = snack.type;
-    if (!snack) {
+    if (!req.body) {
       res.status(400).json("No snack was sent in the request.");
       return;
     } else if (!snackId) {
@@ -101,17 +99,15 @@ const editSnack = async (req, res) => {
       .getDb()
       .db("SnackAPI")
       .collection(collection)
-      .replaceOne({ _id: snackId }, snack);
-    if (response.ok) {
+      .replaceOne({ _id: snackId }, req.body);
+    if (response.acknowledged) {
       res
         .status(204)
-        .json({ message: "Snack was updated successfully", response });
+        .json({ message: "Snack was updated successfully", response }); //needs fixing
     } else {
       res
         .status(500)
-        .json(
-          response.error || "Some error occurred while updating the snack."
-        );
+        .json(response || "Some error occurred while updating the snack.");
     }
   } catch (error) {
     res.status(500).json(error.message);
@@ -120,10 +116,9 @@ const editSnack = async (req, res) => {
 // Delete snack
 const deleteSnack = async (req, res) => {
   try {
-    const snack = req.body?.snack;
+    const collection = req.body?.type;
     const snackId = new ObjectId(req.params.id);
-    const collection = snack.type;
-    if (!snack) {
+    if (!req.body) {
       res.status(400).json("No snack was sent in the request.");
       return;
     } else if (!snackId) {
