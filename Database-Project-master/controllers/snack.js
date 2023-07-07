@@ -4,16 +4,15 @@ const validCollection = require("../helpers/validCollection");
 
 // Creating a post
 const createSnack = async (req, res) => {
-
   try {
     const snack = {
       maker: req.body.maker,
       name: req.body.name,
-      sugar: req.body.sugar,
-      calories: req.body.calories,
-      ingredients: req.body.ingredients,
       ounces: req.body.ounces,
-      totalFat: req.body.totalFat
+      calories: req.body.calories,
+      sugar: req.body.sugar,
+      totalFat: req.body.totalFat,
+      ingredients: req.body.ingredients,
     };
     const response = await mongodb
       .getDb()
@@ -22,7 +21,7 @@ const createSnack = async (req, res) => {
       .insertOne(snack);
 
     if (!response) {
-      res.status(500).json({ message: "Snack is not created." });
+      res.status(500).json({message: "Snack is not created."});
     }
     if (response.acknowledged) {
       res.status(201).json(response);
@@ -34,7 +33,7 @@ const createSnack = async (req, res) => {
         );
     }
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({message: error.message});
   }
 };
 
@@ -50,7 +49,7 @@ const getAllSnacks = async (req, res) => {
       res.status(200).json(lists);
     });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({message: error.message});
   }
 };
 
@@ -61,13 +60,13 @@ const getSnacksId = async (req, res) => {
       .getDb()
       .db("SnackAPI")
       .collection("snack")
-      .find({ _id: selected });
+      .find({_id: selected});
     result.toArray().then((lists) => {
       res.setHeader("Content-Type", "application/json");
       res.status(200).json(lists[0]);
     });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({message: error.message});
   }
 };
 // Edit snack
@@ -88,7 +87,7 @@ const editSnack = async (req, res) => {
         .json("Snack must have a type and the type must be a string.");
       return;
     }
-    const { valid, collections } = validCollection(collection);
+    const {valid, collections} = validCollection(collection);
     if (!valid) {
       res
         .status(400)
@@ -101,11 +100,11 @@ const editSnack = async (req, res) => {
       .getDb()
       .db("SnackAPI")
       .collection(collection)
-      .replaceOne({ _id: snackId }, snack);
+      .replaceOne({_id: snackId}, snack);
     if (response.ok) {
       res
         .status(204)
-        .json({ message: "Snack was updated successfully", response });
+        .json({message: "Snack was updated successfully", response});
     } else {
       res
         .status(500)
@@ -135,7 +134,7 @@ const deleteSnack = async (req, res) => {
         .json("Snack must have a type and the type must be a string.");
       return;
     }
-    const { valid, collections } = validCollection(collection);
+    const {valid, collections} = validCollection(collection);
     if (!valid) {
       res
         .status(400)
@@ -148,11 +147,11 @@ const deleteSnack = async (req, res) => {
       .getDb()
       .db("SnackAPI")
       .collection(collection)
-      .deleteOne({ _id: snackId }, true);
+      .deleteOne({_id: snackId}, true);
     if (response.deletedCount > 0) {
       res
         .status(204)
-        .json({ message: "The snack was deleted successfully.", response });
+        .json({message: "The snack was deleted successfully.", response});
     } else {
       res
         .status(500)
