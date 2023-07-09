@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run build && nodemon app.js",
     "build": "npm i && npm run swagger",
-    "test": "jest",
+    "test": "jest --watchAll --coverage",
     "start": "node app.js",
     "git-update": "git add . && git commit -m \"update\" && git push",
     "swagger": "node ./swagger.js"
