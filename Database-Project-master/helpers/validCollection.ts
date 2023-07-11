@@ -1,5 +1,5 @@
 const validCollection = (collectionName) => {
-  valid = {
+  const valid = {
     "candy&Pastries": "",
     meats: "",
     "nuts&dried_Fruits": "",

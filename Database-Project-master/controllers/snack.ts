@@ -13,8 +13,6 @@ const createSnack = async (req, res) => {
       sugar: req.body.sugar,
       totalFat: req.body.totalFat,
       ingredients: req.body.ingredients,
-      ounces: req.body.ounces,
-      totalFat: req.body.totalFat,
     };
     const response = await mongodb
       .getDb()
@@ -84,8 +82,6 @@ const editSnack = async (req, res) => {
       sugar: req.body.sugar,
       totalFat: req.body.totalFat,
       ingredients: req.body.ingredients,
-      ounces: req.body.ounces,
-      totalFat: req.body.totalFat,
     }
     if (Object.keys(snack).length === 0) {
       res.status(400).json("No snack was sent in the request.");

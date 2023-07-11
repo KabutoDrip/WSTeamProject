@@ -1,6 +1,6 @@
 const express = require("express");
 // Calling from the controllers folder the methods post and delete
-const nutsController = require("../controllers/driednuts.js");
+const nutsController = require("../controllers/driednuts.ts");
 const {requiresAuth} = require("express-openid-connect");
 const router = express.Router();
 
