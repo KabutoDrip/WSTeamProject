@@ -1,6 +1,6 @@
-const mongodb = require("../db/connect");
+const mongodb = require("../db/connect.ts");
 const ObjectId = require("mongodb").ObjectId;
-const validCollection = require("../helpers/validCollection");
+const validCollection = require("../helpers/validCollection.ts");
 
 // Creating a post
 const createSnack = async (req, res) => {

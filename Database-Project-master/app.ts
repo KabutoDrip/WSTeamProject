@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongodb = require("./db/connect");
+const mongodb = require("./db/connect.ts");
 const {auth} = require("express-openid-connect");
 const config = {
   authRequired: false,
@@ -24,7 +24,7 @@ app
     next();
   })
   .use(auth(config))
-  .use("/", require("./routes"));
+  .use("/", require("./routes/index.ts"));
 
 mongodb.initDb((err) => {
   if (err) {

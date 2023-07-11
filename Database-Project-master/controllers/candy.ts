@@ -1,4 +1,4 @@
-const mongodb = require("../db/connect");
+const mongodb = require("../db/connect.ts");
 const ObjectId = require("mongodb").ObjectId;
 
 const createCandyPastries = async (req, res) => {
