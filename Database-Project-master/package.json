@@ -4,12 +4,12 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "npm run build && nodemon app.js",
+    "dev": "npm run build && nodemon app.ts",
     "build": "npm i && npm run swagger",
     "test": "jest --watchAll --coverage",
-    "start": "node app.js",
+    "start": "node app.ts",
     "git-update": "git add . && git commit -m \"update\" && git push",
-    "swagger": "node ./swagger.js"
+    "swagger": "node ./swagger.ts"
   },
   "dependencies": {
     "axios": "^1.4.0",
@@ -20,9 +20,11 @@
     "express-session": "^1.17.3",
     "mongodb": "^5.3.0",
     "swagger-ui-express": "4.6.3",
+    "ts-node": "^10.9.1",
     "validator": "^13.9.0"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.3",
     "eslint": "8.10.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "^4.0.0",

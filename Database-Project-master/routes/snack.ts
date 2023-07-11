@@ -6,7 +6,7 @@ const {
   createSnack,
   editSnack,
   deleteSnack,
-} = require("../controllers/snack.js");
+} = require("../controllers/snack.ts");
 const {requiresAuth} = require("express-openid-connect");
 const router = express.Router();
 
