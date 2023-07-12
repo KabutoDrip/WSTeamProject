@@ -7,7 +7,7 @@ router.use('/driednuts', require('./driednuts.ts'))
 router.use('/meats', require('./meats.ts'))
 router.use('/candy', require('./candy.ts'))
 router.get('/me', requiresAuth(), (req, res) => {
-    res.json(req.oidc.user);
+    res.json({user: req.oidc.user, idToken: req.oidc.idToken});
 })
 
 module.exports = router;
