@@ -112,11 +112,7 @@ const editSnack = async (req, res) => {
       .collection(snack.type)
       .replaceOne({ _id: snackId }, snack);
     if (response.acknowledged) {
-<<<<<<< HEAD
       res.status(204).send();
-=======
-      res.status(204).send(); //needs fixing
->>>>>>> main
     } else {
       res
         .status(500)

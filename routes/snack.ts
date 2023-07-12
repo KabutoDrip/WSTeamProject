@@ -13,7 +13,7 @@ const {
 
 router.get("/", getAllSnacks);
 router.get("/:id", getSnacksId);
-router.post("/", handleAuth, requiresAuth(), createSnack);
+router.post("/", handleAuth, createSnack);
 
 router.put("/:id", handleAuth, editSnack);
 router.delete("/:type/:id", handleAuth, deleteSnack);
