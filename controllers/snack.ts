@@ -1,5 +1,5 @@
 const mongodb = require("../db/connect.ts");
-const ObjectId = require("mongodb").ObjectId;
+const { ObjectId } = require("mongodb");
 const validCollection = require("../helpers/validCollection.ts");
 
 // Creating a post
@@ -110,9 +110,9 @@ const editSnack = async (req, res) => {
       .getDb()
       .db("SnackAPI")
       .collection(snack.type)
-      .replaceOne({ _id: snackId }, req.body);
+      .replaceOne({ _id: snackId }, snack);
     if (response.acknowledged) {
-      res.status(204).send("Snack was updated successfully"); //needs fixing
+      res.status(204).send();
     } else {
       res
         .status(500)
@@ -125,12 +125,9 @@ const editSnack = async (req, res) => {
 // Delete snack
 const deleteSnack = async (req, res) => {
   try {
-    const collection = req.body?.type;
+    const collection = req.params.type;
     const snackId = new ObjectId(req.params.id);
-    if (!req.body) {
-      res.status(400).json("No snack was sent in the request.");
-      return;
-    } else if (!snackId) {
+    if (!snackId) {
       res.status(400).json("Snack must have a valid id.");
       return;
     } else if (!collection || typeof collection !== "string") {
@@ -153,10 +150,8 @@ const deleteSnack = async (req, res) => {
       .db("SnackAPI")
       .collection(collection)
       .deleteOne({ _id: snackId }, true);
-    if (response.deletedCount > 0) {
-      res
-        .status(204)
-        .json({ message: "The snack was deleted successfully.", response });
+    if (response.acknowledged) {
+      res.status(204).send();
     } else {
       res
         .status(500)

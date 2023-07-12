@@ -1,4 +1,7 @@
 const express = require("express");
+const { handleAuth } = require("../controllers/auth.ts");
+const { requiresAuth } = require("express-openid-connect");
+const router = express.Router();
 // Calling from the controllers folder the methods post and delete
 const {
   getAllSnacks,
@@ -7,14 +10,12 @@ const {
   editSnack,
   deleteSnack,
 } = require("../controllers/snack.ts");
-const { requiresAuth } = require("express-openid-connect");
-const router = express.Router();
 
 router.get("/", getAllSnacks);
 router.get("/:id", getSnacksId);
-router.post("/", createSnack);
+router.post("/", handleAuth, createSnack);
 
-router.put("/:id", requiresAuth(), editSnack);
-router.delete("/:id", requiresAuth(), deleteSnack);
+router.put("/:id", handleAuth, editSnack);
+router.delete("/:type/:id", handleAuth, deleteSnack);
 
 module.exports = router;
