@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongodb = require("./db/connect.ts");
-const {auth} = require("express-openid-connect");
+const routes = require("./routes/index.ts");
+const { auth } = require("express-openid-connect");
 const config = {
   authRequired: false,
   idpLogout: true,
@@ -16,7 +17,6 @@ const config = {
 
 const port = process.env.PORT || 3001;
 const app = express();
-
 app
   .use(bodyParser.json())
   .use((req, res, next) => {
@@ -24,7 +24,7 @@ app
     next();
   })
   .use(auth(config))
-  .use("/", require("./routes/index.ts"));
+  .use("/", routes);
 
 mongodb.initDb((err) => {
   if (err) {
@@ -35,3 +35,5 @@ mongodb.initDb((err) => {
     });
   }
 });
+
+module.exports = app;
