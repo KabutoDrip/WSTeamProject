@@ -1,9 +1,9 @@
-import { requiresAuth } from "express-openid-connect";
-
-const { verify } = require("jsonwebtoken");
+const { decode, verify } = require("jsonwebtoken");
 
 const handleAuth = (req, res, next) => {
   const auth = req.headers.authorization;
+  const token = auth?.split("bearer ")?.[1];
+  const decoded = token ? decode(token) : null;
 
   const options = {
     algorithms: ["S256"],
@@ -11,22 +11,20 @@ const handleAuth = (req, res, next) => {
     issuer: process.env.ISSUER_BASE_URL ?? "https://kubutodrip.us.auth0.com",
     complete: true,
   };
-  if (req.headers.authorization) {
+
+  if (token) {
     try {
-      const token = auth.split("bearer ")?.[1]
-      console.log({token, secret: process.env.OKTA_SECRET})
-      const decoded = verify(
-        token,
-        process.env.OKTA_SECRET,
-        options
-      );
-      console.log(decoded);
+      console.log({ token, secret: process.env.OKTA_SECRET });
+      verify(token, process.env.OKTA_SECRET);
+      res.status(200).send("Authenticated");
+      return "it ran";
     } catch (e) {
       res.status(401).send("Unauthenticated");
+      return "it tried";
     }
-  } else {
-    requiresAuth();
   }
+
+  next();
   return;
 };
 

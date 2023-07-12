@@ -125,7 +125,7 @@ const editSnack = async (req, res) => {
 // Delete snack
 const deleteSnack = async (req, res) => {
   try {
-    const collection = req.body?.type;
+    const collection = req.params.type;
     const snackId = new ObjectId(req.params.id);
     if (!req.body) {
       res.status(400).json("No snack was sent in the request.");
