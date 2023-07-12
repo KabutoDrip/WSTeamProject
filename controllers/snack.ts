@@ -1,5 +1,5 @@
 const mongodb = require("../db/connect.ts");
-const ObjectId = require("mongodb").ObjectId;
+const { ObjectId } = require("mongodb");
 const validCollection = require("../helpers/validCollection.ts");
 
 // Creating a post
@@ -82,7 +82,7 @@ const editSnack = async (req, res) => {
       sugar: req.body.sugar,
       totalFat: req.body.totalFat,
       ingredients: req.body.ingredients,
-    }
+    };
     if (Object.keys(snack).length === 0) {
       res.status(400).json("No snack was sent in the request.");
       return;
@@ -108,11 +108,9 @@ const editSnack = async (req, res) => {
       .getDb()
       .db("SnackAPI")
       .collection(snack.type)
-      .replaceOne({ _id: snackId }, req.body);
+      .replaceOne({ _id: snackId }, snack);
     if (response.acknowledged) {
-      res
-        .status(204)
-        .send("Snack was updated successfully"); //needs fixing
+      res.status(204).send();
     } else {
       res
         .status(500)
@@ -151,8 +149,7 @@ const deleteSnack = async (req, res) => {
       .collection(collection)
       .deleteOne({ _id: snackId }, true);
     if (response.acknowledged) {
-      res
-        .status(204)
+      res.status(204).send();
     } else {
       res
         .status(500)

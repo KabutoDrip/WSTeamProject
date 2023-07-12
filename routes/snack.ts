@@ -13,9 +13,9 @@ const {
 
 router.get("/", getAllSnacks);
 router.get("/:id", getSnacksId);
-router.post("/", createSnack);
+router.post("/", handleAuth, requiresAuth(), createSnack);
 
-router.put("/:id", handleAuth ?? requiresAuth(), editSnack);
-router.delete("/:type/:id", handleAuth ?? requiresAuth(), deleteSnack);
+router.put("/:id", handleAuth, requiresAuth(), editSnack);
+router.delete("/:type/:id", handleAuth, requiresAuth(), deleteSnack);
 
 module.exports = router;

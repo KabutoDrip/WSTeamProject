@@ -7,9 +7,11 @@ const config = {
   authRequired: false,
   idpLogout: true,
   secret: process.env.OKTA_SECRET,
+  clientSecret: process.env.OKTA_CLIENT_SECRET,
   baseURL: process.env.OKTA_BASE_URL ?? `http://localhost:3001`,
   clientID: "okqztuEns5khHgcTwRiOk6qOqt2dQzBc",
   issuerBaseURL: "https://kubutodrip.us.auth0.com",
+  idTokenSigningAlg: "HS256",
   session: {
     name: process.env.AUTH_COOKIE_NAME ?? "local-auth",
   },
@@ -24,6 +26,7 @@ app
     next();
   })
   .use(auth(config))
+  .set("view engine", "ejs")
   .use("/", routes);
 
 mongodb.initDb((err) => {
