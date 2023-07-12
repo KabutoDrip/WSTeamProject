@@ -127,10 +127,7 @@ const deleteSnack = async (req, res) => {
   try {
     const collection = req.params.type;
     const snackId = new ObjectId(req.params.id);
-    if (!req.body) {
-      res.status(400).json("No snack was sent in the request.");
-      return;
-    } else if (!snackId) {
+    if (!snackId) {
       res.status(400).json("Snack must have a valid id.");
       return;
     } else if (!collection || typeof collection !== "string") {
@@ -153,10 +150,9 @@ const deleteSnack = async (req, res) => {
       .db("SnackAPI")
       .collection(collection)
       .deleteOne({ _id: snackId }, true);
-    if (response.deletedCount > 0) {
+    if (response.acknowledged) {
       res
         .status(204)
-        .json({ message: "The snack was deleted successfully.", response });
     } else {
       res
         .status(500)

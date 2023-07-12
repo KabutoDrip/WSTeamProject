@@ -38,7 +38,7 @@ Authorization: bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjBETVhQWlRpY1
   "ingredients": "any"
 }
 ###
-DELETE  http://localhost:3001/SampleData1/646bfe99c2cb5f9baecdcada HTTP/1.1
+DELETE  http://localhost:3001/snack/meats/64a772ee28634b65097f2055 HTTP/1.1
 ###
 PUT http://localhost:3001/SampleData2/64697cbc7f006d51681c2ffc HTTP/1.1
 content-type: application/json
