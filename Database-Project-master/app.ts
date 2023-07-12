@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongodb = require("./db/connect.ts");
+const mongodb = require("./db/connect");
 const {auth} = require("express-openid-connect");
 const config = {
   authRequired: false,
@@ -16,6 +16,7 @@ const config = {
 
 const port = process.env.PORT || 3001;
 const app = express();
+if(process.env.NODE_ENV !== 'test'){
 
 app
   .use(bodyParser.json())
@@ -24,7 +25,7 @@ app
     next();
   })
   .use(auth(config))
-  .use("/", require("./routes/index.ts"));
+  .use("/", require("./routes"));
 
 mongodb.initDb((err) => {
   if (err) {
@@ -35,3 +36,24 @@ mongodb.initDb((err) => {
     });
   }
 });
+}else{
+  app
+  .use(bodyParser.json())
+  .use((req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    next();
+  })
+  .use("/", require("./routes"));
+
+mongodb.initDb((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    app.listen(port, () => {
+      console.log(`Connected to DB and listening on ${port}`);
+    });
+  }
+});
+}
+
+module.exports = app
