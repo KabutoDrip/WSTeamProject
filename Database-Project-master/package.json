@@ -19,7 +19,8 @@
     "express-openid-connect": "^2.16.0",
     "express-session": "^1.17.3",
     "mongodb": "^5.3.0",
-    "swagger-ui-express": "4.6.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.3",
     "ts-node": "^10.9.1",
     "validator": "^13.9.0"
   },

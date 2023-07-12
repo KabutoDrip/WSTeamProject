@@ -7,7 +7,7 @@ const {
   editSnack,
   deleteSnack,
 } = require("../controllers/snack.ts");
-const {requiresAuth} = require("express-openid-connect");
+const { requiresAuth } = require("express-openid-connect");
 const router = express.Router();
 
 router.get("/", getAllSnacks);

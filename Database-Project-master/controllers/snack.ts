@@ -55,16 +55,18 @@ const getAllSnacks = async (req, res) => {
 
 const getSnacksId = async (req, res) => {
   try {
-    const selected = new ObjectId(req.params.id);
+    const snackId = new ObjectId(req.params.id);
+    const snackType = String(req.params.snackType);
     const result = await mongodb
       .getDb()
       .db("SnackAPI")
-      .collection("snack")
-      .find({ _id: selected });
-    result.toArray().then((lists) => {
-      res.setHeader("Content-Type", "application/json");
-      res.status(200).json(lists[0]);
-    });
+      .collection(snackType)
+      .find({ _id: snackId });
+    // result.toArray().then((lists) => {
+    //   res.setHeader("Content-Type", "application/json");
+    //   res.status(200).json(lists[0]);
+    //   });
+    res.status(200).json(result.toArray());
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -82,7 +84,7 @@ const editSnack = async (req, res) => {
       sugar: req.body.sugar,
       totalFat: req.body.totalFat,
       ingredients: req.body.ingredients,
-    }
+    };
     if (Object.keys(snack).length === 0) {
       res.status(400).json("No snack was sent in the request.");
       return;
@@ -110,9 +112,7 @@ const editSnack = async (req, res) => {
       .collection(snack.type)
       .replaceOne({ _id: snackId }, req.body);
     if (response.acknowledged) {
-      res
-        .status(204)
-        .send("Snack was updated successfully"); //needs fixing
+      res.status(204).send("Snack was updated successfully"); //needs fixing
     } else {
       res
         .status(500)
