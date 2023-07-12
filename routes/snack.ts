@@ -12,7 +12,7 @@ const {
 } = require("../controllers/snack.ts");
 
 router.get("/", getAllSnacks);
-router.get("/:id", getSnacksId);
+router.get("/:id/:type", getSnacksId);
 router.post("/", handleAuth, createSnack);
 
 router.put("/:id", handleAuth, editSnack);
