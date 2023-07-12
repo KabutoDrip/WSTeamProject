@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongodb = require("./db/connect");
-const {auth} = require("express-openid-connect");
+const mongodb = require("./db/connect.ts");
+const routes = require("./routes/index.ts");
+const { auth } = require("express-openid-connect");
 const config = {
   authRequired: false,
   idpLogout: true,
@@ -16,8 +17,6 @@ const config = {
 
 const port = process.env.PORT || 3001;
 const app = express();
-if(process.env.NODE_ENV !== 'test'){
-
 app
   .use(bodyParser.json())
   .use((req, res, next) => {
@@ -25,7 +24,7 @@ app
     next();
   })
   .use(auth(config))
-  .use("/", require("./routes"));
+  .use("/", routes);
 
 mongodb.initDb((err) => {
   if (err) {
@@ -36,24 +35,5 @@ mongodb.initDb((err) => {
     });
   }
 });
-}else{
-  app
-  .use(bodyParser.json())
-  .use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    next();
-  })
-  .use("/", require("./routes"));
 
-mongodb.initDb((err) => {
-  if (err) {
-    console.log(err);
-  } else {
-    app.listen(port, () => {
-      console.log(`Connected to DB and listening on ${port}`);
-    });
-  }
-});
-}
-
-module.exports = app
+module.exports = app;
