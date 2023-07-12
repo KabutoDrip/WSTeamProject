@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "npm run build && nodemon app.ts",
     "build": "npm i && npm run swagger",
-    "test": "jest --watchAll --coverage",
+    "test": "jest",
+    "test-watch": "jest --watchAll --coverage",
     "start": "node app.ts",
     "git-update": "git add . && git commit -m \"update\" && git push",
     "swagger": "node ./swagger.ts"
@@ -31,6 +32,7 @@
     "jest": "^29.5.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.5.1",
+    "supertest": "^6.3.3",
     "swagger-autogen": "2.23.1"
   },
   "keywords": [],
