@@ -11,9 +11,9 @@ const {
   deleteSnack,
 } = require("../controllers/snack.ts");
 
-router.get("/", getAllSnacks);
+router.get("/:type", getAllSnacks);
 router.get("/:id/:type", getSnacksId);
-router.post("/", handleAuth, createSnack);
+router.post("/:type", handleAuth, createSnack);
 
 router.put("/:id", handleAuth, editSnack);
 router.delete("/:type/:id", handleAuth, deleteSnack);

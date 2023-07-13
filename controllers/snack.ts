@@ -5,6 +5,7 @@ const validCollection = require("../helpers/validCollection.ts");
 // Creating a post
 const createSnack = async (req, res) => {
   try {
+    const snackType = req.params.type;
     const snack = {
       maker: req.body.maker,
       name: req.body.name,
@@ -17,7 +18,7 @@ const createSnack = async (req, res) => {
     const response = await mongodb
       .getDb()
       .db("SnackAPI")
-      .collection("snack")
+      .collection(snackType)
       .insertOne(snack);
 
     if (!response) {
@@ -39,10 +40,11 @@ const createSnack = async (req, res) => {
 
 const getAllSnacks = async (req, res) => {
   try {
+    const snackType = req.params.type;
     const result = await mongodb
       .getDb()
       .db("SnackAPI")
-      .collection("snack")
+      .collection(snackType)
       .find();
     result.toArray().then((lists) => {
       res.setHeader("Content-Type", "application/json");
@@ -56,7 +58,7 @@ const getAllSnacks = async (req, res) => {
 const getSnacksId = async (req, res) => {
   try {
     const snackId = new ObjectId(req.params.id);
-    const snackType = String(req.params.snackType);
+    const snackType = req.params.type;
     const result = await mongodb
       .getDb()
       .db("SnackAPI")
