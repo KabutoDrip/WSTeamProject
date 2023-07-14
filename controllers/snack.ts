@@ -6,6 +6,7 @@ const validCollection = require("../helpers/validCollection.ts");
 const createSnack = async (req, res) => {
   try {
     const snack = {
+      type: req.body.type,
       maker: req.body.maker,
       name: req.body.name,
       ounces: req.body.ounces,
@@ -14,10 +15,25 @@ const createSnack = async (req, res) => {
       totalFat: req.body.totalFat,
       ingredients: req.body.ingredients,
     };
+    if (!snack.type || typeof snack.type !== "string") {
+      res
+        .status(400)
+        .json("Snack must have a type and the type must be a string.");
+      return;
+    }
+    const { valid, collections } = validCollection(snack.type);
+    if (!valid) {
+      res
+        .status(400)
+        .json(
+          `That is not a valid collection. Snack type must be one of the following: ${collections.toString()}`
+        );
+      return;
+    }
     const response = await mongodb
       .getDb()
       .db("SnackAPI")
-      .collection("snack")
+      .collection(snack.type)
       .insertOne(snack);
 
     if (!response) {
@@ -56,17 +72,13 @@ const getAllSnacks = async (req, res) => {
 const getSnacksId = async (req, res) => {
   try {
     const snackId = new ObjectId(req.params.id);
-    const snackType = String(req.params.snackType);
+    const snackType = String(req.params.type);
     const result = await mongodb
       .getDb()
       .db("SnackAPI")
       .collection(snackType)
-      .find({ _id: snackId });
-    // result.toArray().then((lists) => {
-    //   res.setHeader("Content-Type", "application/json");
-    //   res.status(200).json(lists[0]);
-    //   });
-    res.status(200).json(result.toArray());
+      .findOne({ _id: snackId });
+    res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
