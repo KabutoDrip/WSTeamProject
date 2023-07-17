@@ -7,7 +7,7 @@ const createSnack = async (req, res) => {
   try {
     const snackType = req.params.type;
     const snack = {
-      type: req.body.type,
+      //type: req.body.type,
       maker: req.body.maker,
       name: req.body.name,
       ounces: req.body.ounces,
@@ -16,13 +16,13 @@ const createSnack = async (req, res) => {
       totalFat: req.body.totalFat,
       ingredients: req.body.ingredients,
     };
-    if (!snack.type || typeof snack.type !== "string") {
+    if (!snackType || typeof snackType !== "string") {
       res
         .status(400)
         .json("Snack must have a type and the type must be a string.");
       return;
     }
-    const { valid, collections } = validCollection(snack.type);
+    const { valid, collections } = validCollection(snackType);
     if (!valid) {
       res
         .status(400)
@@ -57,12 +57,27 @@ const createSnack = async (req, res) => {
 const getAllSnacks = async (req, res) => {
   try {
     const snackType = req.params.type;
-    const result = await mongodb
+    if (!snackType || typeof snackType !== "string") {
+      res
+        .status(400)
+        .json("Snack must have a type and the type must be a string.");
+      return;
+    }
+    const { valid, collections } = validCollection(snackType);
+    if (!valid) {
+      res
+        .status(400)
+        .json(
+          `That is not a valid collection. Snack type must be one of the following: ${collections.toString()}`
+        );
+      return;
+    }
+    const response = await mongodb
       .getDb()
       .db("SnackAPI")
       .collection(snackType)
       .find();
-    result.toArray().then((lists) => {
+    response.toArray().then((lists) => {
       res.setHeader("Content-Type", "application/json");
       res.status(200).json(lists);
     });
@@ -75,12 +90,27 @@ const getSnacksId = async (req, res) => {
   try {
     const snackId = new ObjectId(req.params.id);
     const snackType = req.params.type;
-    const result = await mongodb
+    if (!snackType || typeof snackType !== "string") {
+      res
+        .status(400)
+        .json("Snack must have a type and the type must be a string.");
+      return;
+    }
+    const { valid, collections } = validCollection(snackType);
+    if (!valid) {
+      res
+        .status(400)
+        .json(
+          `That is not a valid collection. Snack type must be one of the following: ${collections.toString()}`
+        );
+      return;
+    }
+    const response = await mongodb
       .getDb()
       .db("SnackAPI")
       .collection(snackType)
       .findOne({ _id: snackId });
-    res.status(200).json(result);
+    res.status(200).json(response);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
