@@ -1,10 +1,8 @@
 const { verify } = require("jsonwebtoken");
-const { requiresAuth } = require("express-openid-connect");
 
 const handleAuth = (req, res, next) => {
   const auth = req.headers.authorization;
   const token = auth?.split("Bearer ")?.[1];
-  const requiresLoginCheck = !req.oidc.isAuthenticated();
 
   if (token) {
     try {
@@ -17,8 +15,11 @@ const handleAuth = (req, res, next) => {
       return;
     }
   } else {
-    requiresAuth(requiresLoginCheck, req, res, next);
-    next();
+    if (req.oidc.isAuthenticated()) {
+      next();
+    } else {
+      res.status(401).send("Unauthenticated");
+    }
     return;
   }
 };
