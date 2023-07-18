@@ -26,6 +26,7 @@ describe("insert", () => {
     const snack = db.collection("snack");
 
     const mockUser = {
+      _id: undefined,
       type: "Candy",
       maker: "Doritos",
       name: "Cocacola",
